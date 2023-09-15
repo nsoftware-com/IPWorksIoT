@@ -5,14 +5,14 @@ The provided sample projects offer a concise yet effective demonstration of the 
 IPWorks IoT 2022 libraries for the corresponding edition are required to run these samples.  Free download from: [https://www.nsoftware.com/ipworksiot](https://www.nsoftware.com/ipworksiot)
 
 ## Reference Documentation
-[Java](https://cdn.nsoftware.com/help/IOH/java/)
-[Javascript](https://cdn.nsoftware.com/help/IOH/js/)
-[.NET](https://cdn.nsoftware.com/help/IOH/cs/)
-[Python](https://cdn.nsoftware.com/help/IOH/py/)
-[PHP](https://cdn.nsoftware.com/help/IOH/php/)
-[C++](https://cdn.nsoftware.com/help/IOH/cpp/)
-[macOS](https://cdn.nsoftware.com/help/IOH/mac/)
-[iOS](https://cdn.nsoftware.com/help/IOH/mac/)
+* [Java Edition](https://cdn.nsoftware.com/help/IOH/java/)
+* [Javascript Edition](https://cdn.nsoftware.com/help/IOH/js/)
+* [.NET Edition](https://cdn.nsoftware.com/help/IOH/cs/)
+* [Python Edition](https://cdn.nsoftware.com/help/IOH/py/)
+* [PHP Edition](https://cdn.nsoftware.com/help/IOH/php/)
+* [C++ Edition](https://cdn.nsoftware.com/help/IOH/cpp/)
+* [macOS Edition](https://cdn.nsoftware.com/help/IOH/mac/)
+* [iOS Edition](https://cdn.nsoftware.com/help/IOH/mac/)
 
 ## Sample Projects
 | Sample Project | Description |
