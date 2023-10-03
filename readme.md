@@ -6,11 +6,12 @@ IPWorks IoT 2022 libraries for the corresponding edition are required to run the
 
 ## Reference Documentation
 * [Java Edition](https://cdn.nsoftware.com/help/IOH/java/)
-* [Javascript Edition](https://cdn.nsoftware.com/help/IOH/js/)
 * [.NET Edition](https://cdn.nsoftware.com/help/IOH/cs/)
+* [JavaScript Edition](https://cdn.nsoftware.com/help/IOH/js/)
 * [Python Edition](https://cdn.nsoftware.com/help/IOH/py/)
 * [PHP Edition](https://cdn.nsoftware.com/help/IOH/php/)
 * [C++ Edition](https://cdn.nsoftware.com/help/IOH/cpp/)
+* [Delphi Edition](https://cdn.nsoftware.com/help/IOH/dlp/)
 * [macOS Edition](https://cdn.nsoftware.com/help/IOH/mac/)
 * [iOS Edition](https://cdn.nsoftware.com/help/IOH/mac/)
 
