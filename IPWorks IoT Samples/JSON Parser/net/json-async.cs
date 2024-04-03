@@ -15,23 +15,24 @@
 
 using System.Collections.Generic;
 ﻿using System;
-using nsoftware.async.IPWorksIoT;
 using System.Threading.Tasks;
-class Program
+using nsoftware.async.IPWorksIoT;
+
+class jsonDemo
 {
+  private static Json json = new nsoftware.async.IPWorksIoT.Json();
+
   static async Task Main(string[] args)
   {
-    Json json = new Json();
-
-    json.OnStartDocument += (sender, e) => Console.WriteLine("Started parsing file");
-    json.OnEndDocument += (sender, e) => Console.WriteLine("Finished parsing file");
-    json.OnStartElement += (sender, e) => Console.WriteLine($"Element {e.Element} started");
-    json.OnEndElement += (sender, e) => Console.WriteLine($"Element {e.Element} ended");
-    json.OnCharacters += (sender, e) => Console.WriteLine(e.Text);
+    json.OnStartDocument += json_OnStartDocument;
+    json.OnEndDocument += json_OnEndDocument;
+    json.OnStartElement += json_OnStartElement;
+    json.OnEndElement += json_OnEndElement;
+    json.OnCharacters += json_OnCharacters;
 
     try
     {
-      json.InputFile = "books.json";
+      json.InputFile = "..\\..\\..\\books.json";
       await json.Parse();
 
       json.XPath = "/json/store/books";
@@ -39,23 +40,52 @@ class Program
 
       for (int i = 1; i <= bookCount; i++)
       {
-        Console.WriteLine($"\nBook #{i}");
+        Console.WriteLine("\nBook #" + i);
 
-        json.XPath = $"/json/store/books[{i}]";
+        json.XPath = "/json/store/books/[" + i + "]";
         int propCount = json.XChildren.Count;
 
         for (int j = 1; j <= propCount; j++)
         {
-          json.XPath = $"/json/store/books[{i}][{j}]";
-          Console.WriteLine($"{json.XElement}: {json.XText}");
+          json.XPath = "/json/store/books/[" + i + "]/[" + j + "]";
+          Console.WriteLine(json.XElement + ": " + json.XText);
         }
       }
     }
-    catch (IPWorksIoTException e)
+    catch (Exception ex)
     {
-      Console.WriteLine($"ERROR: {e.Message}");
+      Console.WriteLine(ex.Message);
     }
   }
+
+  #region "Events"
+
+  private static void json_OnStartDocument(object sender, JsonStartDocumentEventArgs e)
+  {
+    Console.WriteLine("Started parsing file");
+  }
+
+  private static void json_OnEndDocument(object sender, JsonEndDocumentEventArgs e)
+  {
+    Console.WriteLine("Finished parsing file");
+  }
+
+  private static void json_OnStartElement(object sender, JsonStartElementEventArgs e)
+  {
+    Console.WriteLine("Element " + e.Element + " started");
+  }
+
+  private static void json_OnEndElement(object sender, JsonEndElementEventArgs e)
+  {
+    Console.WriteLine("Element " + e.Element + " ended");
+  }
+
+  private static void json_OnCharacters(object sender, JsonCharactersEventArgs e)
+  {
+    Console.WriteLine(e.Text);
+  }
+
+  #endregion
 }
 
 
