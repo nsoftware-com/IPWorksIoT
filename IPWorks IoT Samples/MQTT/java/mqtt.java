@@ -1,5 +1,5 @@
 /*
- * IPWorks IoT 2022 Java Edition - Sample Project
+ * IPWorks IoT 2024 Java Edition - Sample Project
  *
  * This sample project demonstrates the usage of IPWorks IoT in a 
  * simple, straightforward way. It is not intended to be a complete 
@@ -24,73 +24,73 @@ public class mqtt extends ConsoleDemo{
         System.out.println("* subscribes to that topic and publishes the message. *");
         System.out.println("* The demo uses a publicly available test server.     *");
         System.out.println("*******************************************************");
-        Mqtt mqtt = new Mqtt();
+        MQTT mqtt = new MQTT();
         try {
             // Set up event handlers
-            mqtt.addMqttEventListener(new MqttEventListener() {
+            mqtt.addMQTTEventListener(new MQTTEventListener() {
                 @Override
-                public void connected(MqttConnectedEvent mqttConnectedEvent) {
+                public void connected(MQTTConnectedEvent mqttConnectedEvent) {
 
                 }
 
                 @Override
-                public void connectionStatus(MqttConnectionStatusEvent mqttConnectionStatusEvent) {
+                public void connectionStatus(MQTTConnectionStatusEvent mqttConnectionStatusEvent) {
 
                 }
 
                 @Override
-                public void disconnected(MqttDisconnectedEvent mqttDisconnectedEvent) {
+                public void disconnected(MQTTDisconnectedEvent mqttDisconnectedEvent) {
 
                 }
 
                 @Override
-                public void error(MqttErrorEvent mqttErrorEvent) {
+                public void error(MQTTErrorEvent mqttErrorEvent) {
 
                 }
 
                 @Override
-                public void log(MqttLogEvent mqttLogEvent) {
+                public void log(MQTTLogEvent mqttLogEvent) {
 
                 }
 
                 @Override
-                public void messageAck(MqttMessageAckEvent mqttMessageAckEvent) {
+                public void messageAck(MQTTMessageAckEvent mqttMessageAckEvent) {
 
                 }
 
                 @Override
-                public void messageIn(MqttMessageInEvent mqttMessageInEvent) {
+                public void messageIn(MQTTMessageInEvent mqttMessageInEvent) {
                     // Fires whenever a message is received
                     System.out.println(new String(mqttMessageInEvent.message)); // Print the contents of the message.
                 }
 
                 @Override
-                public void messageOut(MqttMessageOutEvent mqttMessageOutEvent) {
+                public void messageOut(MQTTMessageOutEvent mqttMessageOutEvent) {
 
                 }
 
                 @Override
-                public void readyToSend(MqttReadyToSendEvent mqttReadyToSendEvent) {
+                public void readyToSend(MQTTReadyToSendEvent mqttReadyToSendEvent) {
 
                 }
 
                 @Override
-                public void SSLServerAuthentication(MqttSSLServerAuthenticationEvent mqttSSLServerAuthenticationEvent) {
+                public void SSLServerAuthentication(MQTTSSLServerAuthenticationEvent mqttSSLServerAuthenticationEvent) {
 
                 }
 
                 @Override
-                public void SSLStatus(MqttSSLStatusEvent mqttSSLStatusEvent) {
+                public void SSLStatus(MQTTSSLStatusEvent mqttSSLStatusEvent) {
 
                 }
 
                 @Override
-                public void subscribed(MqttSubscribedEvent mqttSubscribedEvent) {
+                public void subscribed(MQTTSubscribedEvent mqttSubscribedEvent) {
 
                 }
 
                 @Override
-                public void unsubscribed(MqttUnsubscribedEvent mqttUnsubscribedEvent) {
+                public void unsubscribed(MQTTUnsubscribedEvent mqttUnsubscribedEvent) {
 
                 }
             });
@@ -139,15 +139,13 @@ class ConsoleDemo {
     System.out.print(label + punctuation + " ");
     return input();
   }
-
-  static String prompt(String label, String punctuation, String defaultVal)
-  {
-	System.out.print(label + " [" + defaultVal + "] " + punctuation + " ");
-	String response = input();
-	if(response.equals(""))
-		return defaultVal;
-	else
-		return response;
+  static String prompt(String label, String punctuation, String defaultVal) {
+      System.out.print(label + " [" + defaultVal + "] " + punctuation + " ");
+      String response = input();
+      if (response.equals(""))
+        return defaultVal;
+      else
+        return response;
   }
 
   static char ask(String label) {

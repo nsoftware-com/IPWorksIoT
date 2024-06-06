@@ -1,5 +1,5 @@
 (*
- * IPWorks IoT 2022 Delphi Edition - Sample Project
+ * IPWorks IoT 2024 Delphi Edition - Sample Project
  *
  * This sample project demonstrates the usage of IPWorks IoT in a 
  * simple, straightforward way. It is not intended to be a complete 
@@ -458,7 +458,7 @@ Screen.Cursor := crHourGlass;
       begin;
         etNodeData.Text := string(TreeView1.Selected.Data^)
       end;
-   except on E: EiotCoap do
+   except on E: EIPworksIoT do
       ShowMessage(E.Message);
    end;
    Screen.Cursor := crDefault;

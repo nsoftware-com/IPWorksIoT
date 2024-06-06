@@ -2,18 +2,18 @@
 The provided sample projects offer a concise yet effective demonstration of the components from IPWorks IoT, showcasing their usage in a straightforward manner. While they are not intended to be complete applications, they serve as valuable illustrations of key features. To enhance clarity, error handling and checks are simplified, allowing users to focus on the core functionality.
 
 ## Requirements
-IPWorks IoT 2022 libraries for the corresponding edition are required to run these samples.  Free download from: [https://www.nsoftware.com/ipworksiot](https://www.nsoftware.com/ipworksiot)
+IPWorks IoT 2024 libraries for the corresponding edition are required to run these samples.  Free download from: [https://www.nsoftware.com/ipworksiot](https://www.nsoftware.com/ipworksiot)
 
 ## Reference Documentation
-* [Java Edition](https://cdn.nsoftware.com/help/IOH/java/)
-* [.NET Edition](https://cdn.nsoftware.com/help/IOH/cs/)
-* [JavaScript Edition](https://cdn.nsoftware.com/help/IOH/js/)
-* [Python Edition](https://cdn.nsoftware.com/help/IOH/py/)
-* [PHP Edition](https://cdn.nsoftware.com/help/IOH/php/)
-* [C++ Edition](https://cdn.nsoftware.com/help/IOH/cpp/)
-* [Delphi Edition](https://cdn.nsoftware.com/help/IOH/dlp/)
-* [macOS Edition](https://cdn.nsoftware.com/help/IOH/mac/)
-* [iOS Edition](https://cdn.nsoftware.com/help/IOH/mac/)
+* [Java Edition](https://cdn.nsoftware.com/help/IOJ/java/)
+* [.NET Edition](https://cdn.nsoftware.com/help/IOJ/cs/)
+* [JavaScript Edition](https://cdn.nsoftware.com/help/IOJ/js/)
+* [Python Edition](https://cdn.nsoftware.com/help/IOJ/py/)
+* [PHP Edition](https://cdn.nsoftware.com/help/IOJ/php/)
+* [C++ Edition](https://cdn.nsoftware.com/help/IOJ/cpp/)
+* [Delphi Edition](https://cdn.nsoftware.com/help/IOJ/dlp/)
+* [macOS Edition](https://cdn.nsoftware.com/help/IOJ/mac/)
+* [iOS Edition](https://cdn.nsoftware.com/help/IOJ/mac/)
 
 ## Sample Projects
 | Sample Project | Description |

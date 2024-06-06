@@ -1,5 +1,5 @@
 (*
- * IPWorks IoT 2022 Delphi Edition - Sample Project
+ * IPWorks IoT 2024 Delphi Edition - Sample Project
  *
  * This sample project demonstrates the usage of IPWorks IoT in a 
  * simple, straightforward way. It is not intended to be a complete 
@@ -44,9 +44,9 @@ type
     tMessage: TEdit;
     bConnect: TButton;
     bSend: TButton;
-    bFetch: TButton;
+    bRetrieve: TButton;
     cSSL: TCheckBox;
-    rFetch: TRadioButton;
+    rRetrieve: TRadioButton;
     rAutomatic: TRadioButton;
     Label11: TLabel;
     cSettled: TCheckBox;
@@ -69,7 +69,7 @@ type
       SessionIndex: Integer; const LinkName: string; LinkIndex: Integer;
       const MessageId: string; var State: Integer);
     procedure bSendClick(Sender: TObject);
-    procedure bFetchClick(Sender: TObject);
+    procedure bRetrieveClick(Sender: TObject);
     procedure iotAMQP1MessageOutcome(Sender: TObject; const SessionName: string;
       SessionIndex: Integer; const LinkName: string; LinkIndex: Integer;
       const MessageId: string; Direction, State: Integer);
@@ -103,13 +103,13 @@ begin
     end;
 end;
 
-// Fetch a message
-procedure TFormAMQP.bFetchClick(Sender: TObject);
+// Retrieve a message
+procedure TFormAMQP.bRetrieveClick(Sender: TObject);
 begin
-  iotAMQP1.FetchTimeout := 5;
-  Log('Fetching message...');
+  iotAMQP1.RetrieveTimeout := 5;
+  Log('Retrieveing message...');
   try
-    iotAMQP1.FetchMessage(tReceiver.Text)
+    iotAMQP1.RetrieveMessage(tReceiver.Text)
   except
     on E: Exception do
     begin
@@ -175,15 +175,15 @@ begin
     iotAMQP1.CreateSenderLink(tSession.Text, tSender.Text, tTarget.Text);
     Log('Created sender link: ' + tSender.Text);
     // Create receiver link
-    if rFetch.Checked then
-      iotAMQP1.ReceiveMode := TiotamqpReceiveModes.rmFetch;
+    if rRetrieve.Checked then
+      iotAMQP1.ReceiveMode := TiotamqpReceiveModes.rmRetrieve;
     iotAMQP1.CreateReceiverLink(tSession.Text, tReceiver.Text, tTarget.Text);
     Log('Created receiver link: ' + tReceiver.Text);
     // Enable form components that work while connected
     bConnect.Caption := '&Disconnect';
     bConnect.Enabled := True;
     SetGroupEnabled(gSendReceive, True);
-    bFetch.Enabled := rFetch.Checked;
+    bRetrieve.Enabled := rRetrieve.Checked;
   except
     on E: Exception do
     begin

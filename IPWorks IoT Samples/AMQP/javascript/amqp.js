@@ -1,5 +1,5 @@
 /*
- * IPWorks IoT 2022 JavaScript Edition - Sample Project
+ * IPWorks IoT 2024 JavaScript Edition - Sample Project
  *
  * This sample project demonstrates the usage of IPWorks IoT in a 
  * simple, straightforward way. It is not intended to be a complete 
@@ -48,14 +48,14 @@ async function main() {
     console.log("    -p      the password to log in (default is none)");
     console.log("    -rp     the remote port to connect to on the remote host (default is 5672, or 5671 for ssl)");
     console.log("    -s      sets ssl enabled to true (default is false)");
-    console.log("    -f      [only used when sending] sets receive mode to fetch while sending messages (default is automatic)");
+    console.log("    -f      [only used when sending] sets receive mode to retrieve while sending messages (default is automatic)");
     console.log("    -m      [only used when sending] the message to send (default is 'Hello, AMQP!'");
-    console.log("  action    (send/fetch) action to perform; sending a message or fetching a message");
+    console.log("  action    (send/retrieve) action to perform; sending a message or retrieveing a message");
     console.log("  host      the domain name or IP address of the remote host to connect to");
     console.log("Examples: node amqp.js -u username -p password -m \"Hello, AMQP\" send [server address]"); //send with defaults: port 5672, no ssl, automatic mode
-    console.log("          node amqp.js -u username -p password -rp 5670 -s -f -m \"Hello, AMQP\" send [server address]"); //send with options: port 5670, ssl enabled, fetch mode
-    console.log("          node amqp.js -u username -p password fetch [server address]"); //fetch with defaults: port 5672, no ssl
-    console.log("          node amqp.js -u username -p password -rp 5670 -s fetch [server address]"); //fetch with options: port 5670, ssl enabled
+    console.log("          node amqp.js -u username -p password -rp 5670 -s -f -m \"Hello, AMQP\" send [server address]"); //send with options: port 5670, ssl enabled, retrieve mode
+    console.log("          node amqp.js -u username -p password retrieve [server address]"); //retrieve with defaults: port 5672, no ssl
+    console.log("          node amqp.js -u username -p password -rp 5670 -s retrieve [server address]"); //retrieve with options: port 5670, ssl enabled
     process.exit();
   }
 
@@ -71,7 +71,7 @@ async function main() {
         amqp.setRemotePort(remotePort);
       }
       if (argv[i] === "-s") amqp.setSSLEnabled(true);
-      if (argv[i] === "-f") amqp.setReceiveMode(1); //fetch mode = 1, default is automatic
+      if (argv[i] === "-f") amqp.setReceiveMode(1); //retrieve mode = 1, default is automatic
       if (argv[i] === "-m") message = argv[i + 1];
     }
   }
@@ -81,8 +81,8 @@ async function main() {
     await amqp.connect(argv[argv.length - 1], remotePort);
     await amqp.createSession("SessionName"); //create session with session name
     await amqp.createSenderLink("SessionName", "SenderLinkName", "TargetName"); //create sender link
-    if (argv[argv.length - 2] === "fetch") { //if action is fetch
-      amqp.setReceiveMode(1); //fetch mode = 1, default is automatic
+    if (argv[argv.length - 2] === "retrieve") { //if action is retrieve
+      amqp.setReceiveMode(1); //retrieve mode = 1, default is automatic
     }
     await amqp.createReceiverLink("SessionName", "ReceiverLinkName", "TargetName");
   } catch (error) {
@@ -109,13 +109,13 @@ async function main() {
     await amqp.disconnect();
     process.exit();
   } else {
-    //fetch message
+    //retrieve message
     try {
-      amqp.setFetchTimeout(5); //set timeout to 5 seconds
-      console.log("Fetching message...");
-      await amqp.fetchMessage("ReceiverLinkName"); //fetch message using same receiver link
+      amqp.setRetrieveTimeout(5); //set timeout to 5 seconds
+      console.log("Retrieveing message...");
+      await amqp.retrieveMessage("ReceiverLinkName"); //retrieve message using same receiver link
     } catch (error) {
-      console.log(`Error fetching message: ${error.message}`);
+      console.log(`Error retrieveing message: ${error.message}`);
     }
     await amqp.disconnect();
     process.exit();

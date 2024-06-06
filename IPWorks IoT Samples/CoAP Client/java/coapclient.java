@@ -1,5 +1,5 @@
 /*
- * IPWorks IoT 2022 Java Edition - Sample Project
+ * IPWorks IoT 2024 Java Edition - Sample Project
  *
  * This sample project demonstrates the usage of IPWorks IoT in a 
  * simple, straightforward way. It is not intended to be a complete 
@@ -26,23 +26,23 @@ public class coapclient extends ConsoleDemo{
         System.out.println("* to a CoAP server, as well as observing a specific resource at *");
         System.out.println("* a specified URI.                                              *");
         System.out.println("*****************************************************************\n");
-        Coap coap = new Coap();
+        CoAP coap = new CoAP();
 
         try {
             //add listeners
-            coap.addCoapEventListener(new CoapEventListener() {
+            coap.addCoAPEventListener(new CoAPEventListener() {
                 @Override
-                public void error(CoapErrorEvent e) {
+                public void error(CoAPErrorEvent e) {
                     System.out.println("OnError: [" + e.errorCode + "] " + e.description);
                 }
 
                 @Override
-                public void log(CoapLogEvent e) {
+                public void log(CoAPLogEvent e) {
                     System.out.println("Log: [" + e.logLevel + "] " + e.message);
                 }
 
                 @Override
-                public void notification(CoapNotificationEvent e) {
+                public void notification(CoAPNotificationEvent e) {
                     if (e.isLatest){
                         System.out.println("OnNotification: Received notification about resource at " + e.URI + ": [" +
                                 coap.getResponseCode() + "] " + new String(coap.getResponseData()));
@@ -53,17 +53,17 @@ public class coapclient extends ConsoleDemo{
                 }
 
                 @Override
-                public void register(CoapRegisterEvent coapRegisterEvent) {
+                public void register(CoAPRegisterEvent coapRegisterEvent) {
                     // TODO Auto-generated method stub
                 }
 
                 @Override
-                public void request(CoapRequestEvent coapRequestEvent) {
+                public void request(CoAPRequestEvent coapRequestEvent) {
                     // TODO Auto-generated method stub
                 }
 
                 @Override
-                public void requestComplete(CoapRequestCompleteEvent e) {
+                public void requestComplete(CoAPRequestCompleteEvent e) {
                     if (e.errorCode == 0)
                         System.out.println("Request for " + e.URI + " completed successfully: [" +
                                 coap.getResponseCode() + "] " + new String(coap.getResponseData()));
@@ -76,12 +76,12 @@ public class coapclient extends ConsoleDemo{
                 }
 
                 @Override
-                public void responseComplete(CoapResponseCompleteEvent e) {
+                public void responseComplete(CoAPResponseCompleteEvent e) {
                     // TODO Auto-generated method stub
                 }
 
                 @Override
-                public void unregistered(CoapUnregisteredEvent coapUnregisteredEvent) {
+                public void unregistered(CoAPUnregisteredEvent coapUnregisteredEvent) {
                     // TODO Auto-generated method stub
                 }
             });
@@ -207,15 +207,13 @@ class ConsoleDemo {
     System.out.print(label + punctuation + " ");
     return input();
   }
-
-  static String prompt(String label, String punctuation, String defaultVal)
-  {
-	System.out.print(label + " [" + defaultVal + "] " + punctuation + " ");
-	String response = input();
-	if(response.equals(""))
-		return defaultVal;
-	else
-		return response;
+  static String prompt(String label, String punctuation, String defaultVal) {
+      System.out.print(label + " [" + defaultVal + "] " + punctuation + " ");
+      String response = input();
+      if (response.equals(""))
+        return defaultVal;
+      else
+        return response;
   }
 
   static char ask(String label) {

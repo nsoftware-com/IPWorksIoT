@@ -1,5 +1,5 @@
 /*
- * IPWorks IoT 2022 Java Edition - Sample Project
+ * IPWorks IoT 2024 Java Edition - Sample Project
  *
  * This sample project demonstrates the usage of IPWorks IoT in a 
  * simple, straightforward way. It is not intended to be a complete 
@@ -22,51 +22,51 @@ public class amqp extends ConsoleDemo{
         System.out.println("* This is a demo for the IP*Works IoT AMQP Class.     *");
         System.out.println("* It allows simple message sending and receiving.     *");
         System.out.println("*******************************************************");
-        Amqp amqp = new Amqp();
+        AMQP amqp = new AMQP();
         
         
         try {
         //add listeners
-        	amqp.addAmqpEventListener(new AmqpEventListener() {
+        	amqp.addAMQPEventListener(new AMQPEventListener() {
     			
     			@Override
-    			public void messageOutcome(AmqpMessageOutcomeEvent arg0) {
+    			public void messageOutcome(AMQPMessageOutcomeEvent arg0) {
     				// TODO Auto-generated method stub
     				
     			}
     			
     			@Override
-    			public void messageOut(AmqpMessageOutEvent arg0) {
+    			public void messageOut(AMQPMessageOutEvent arg0) {
     				// TODO Auto-generated method stub
     				
     			}
     			
     			@Override
-    			public void messageIn(AmqpMessageInEvent arg0) {
+    			public void messageIn(AMQPMessageInEvent arg0) {
     				System.out.println("\nMessage Received: "+amqp.getReceivedMessage().getValue());
     				
     			}
     			
     			@Override
-    			public void log(AmqpLogEvent arg0) {
+    			public void log(AMQPLogEvent arg0) {
     				// TODO Auto-generated method stub
     				
     			}
     			
     			@Override
-    			public void linkReadyToSend(AmqpLinkReadyToSendEvent arg0) {
+    			public void linkReadyToSend(AMQPLinkReadyToSendEvent arg0) {
     				// TODO Auto-generated method stub
     				
     			}
     			
     			@Override
-    			public void error(AmqpErrorEvent arg0) {
+    			public void error(AMQPErrorEvent arg0) {
     				// TODO Auto-generated method stub
     				
     			}
     			
     			@Override
-    			public void disconnected(AmqpDisconnectedEvent arg0) {
+    			public void disconnected(AMQPDisconnectedEvent arg0) {
     				if(arg0.statusCode!=0) {
 						System.out.println("Error disconnecting: "+arg0.statusCode+" - "+arg0.description);
 					}
@@ -74,25 +74,25 @@ public class amqp extends ConsoleDemo{
     			}
     			
     			@Override
-    			public void connectionStatus(AmqpConnectionStatusEvent arg0) {
+    			public void connectionStatus(AMQPConnectionStatusEvent arg0) {
     				// TODO Auto-generated method stub
     				
     			}
     			
     			@Override
-    			public void connected(AmqpConnectedEvent arg0) {
+    			public void connected(AMQPConnectedEvent arg0) {
     				System.out.println("Connected.");
     				
     			}
     			
     			@Override
-    			public void SSLStatus(AmqpSSLStatusEvent arg0) {
+    			public void SSLStatus(AMQPSSLStatusEvent arg0) {
     				// TODO Auto-generated method stub
     				
     			}
     			
     			@Override
-    			public void SSLServerAuthentication(AmqpSSLServerAuthenticationEvent arg0) {
+    			public void SSLServerAuthentication(AMQPSSLServerAuthenticationEvent arg0) {
     				arg0.accept=true;
     				
     			}
@@ -120,14 +120,14 @@ public class amqp extends ConsoleDemo{
         //connect to host
         amqp.connect();
         
-        //prompt for automatic or fetch flow
+        //prompt for automatic or retrieve flow
         char flow = ' ';
         while(flow!='a'&&flow!='f') {
     		flow = ask("Choose (a)utomatic or (f)etch flow",":","a/f");
         }
         if(flow=='f') {
-        	amqp.setReceiveMode(Amqp.rmFetch);
-            amqp.setFetchTimeout(5);
+        	amqp.setReceiveMode(AMQP.rmRetrieve);
+            amqp.setRetrieveTimeout(5);
         }
         
         //set session id and create sender link with a unique link name and name of target node (at most once flow by default, settled = true)
@@ -146,9 +146,9 @@ public class amqp extends ConsoleDemo{
         		amqp.sendMessage("SenderLinkName");
         		System.out.println("Message sent.\n");
         	} else if(response=='f') {
-        		System.out.println("Fetching message...");
+        		System.out.println("Retrieveing message...");
         		try {
-        		amqp.fetchMessage("ReceiverLinkName");
+        		amqp.retrieveMessage("ReceiverLinkName");
         		} catch(IPWorksIoTException e) {
         			if(e.getCode()==201) {
         				System.out.println("Timeout. No message received.");
@@ -186,15 +186,13 @@ class ConsoleDemo {
     System.out.print(label + punctuation + " ");
     return input();
   }
-
-  static String prompt(String label, String punctuation, String defaultVal)
-  {
-	System.out.print(label + " [" + defaultVal + "] " + punctuation + " ");
-	String response = input();
-	if(response.equals(""))
-		return defaultVal;
-	else
-		return response;
+  static String prompt(String label, String punctuation, String defaultVal) {
+      System.out.print(label + " [" + defaultVal + "] " + punctuation + " ");
+      String response = input();
+      if (response.equals(""))
+        return defaultVal;
+      else
+        return response;
   }
 
   static char ask(String label) {

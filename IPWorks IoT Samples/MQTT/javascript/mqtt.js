@@ -1,5 +1,5 @@
 /*
- * IPWorks IoT 2022 JavaScript Edition - Sample Project
+ * IPWorks IoT 2024 JavaScript Edition - Sample Project
  *
  * This sample project demonstrates the usage of IPWorks IoT in a 
  * simple, straightforward way. It is not intended to be a complete 

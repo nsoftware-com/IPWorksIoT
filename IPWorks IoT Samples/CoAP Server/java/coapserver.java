@@ -1,5 +1,5 @@
 /*
- * IPWorks IoT 2022 Java Edition - Sample Project
+ * IPWorks IoT 2024 Java Edition - Sample Project
  *
  * This sample project demonstrates the usage of IPWorks IoT in a 
  * simple, straightforward way. It is not intended to be a complete 
@@ -22,7 +22,7 @@ public class coapserver extends ConsoleDemo{
 
     private static TreeNode root;
     private static HashMap<String, List<String>> observedNodes;
-    private static Coap coap;
+    private static CoAP coap;
 
     private static class TreeNode {
         public String tag, text, path;
@@ -87,7 +87,7 @@ public class coapserver extends ConsoleDemo{
         System.out.println("*         +-- tiger                                               *");
         System.out.println("*         +-- bear                                                *");
         System.out.println("*******************************************************************\n");
-        coap = new Coap();
+        coap = new CoAP();
 
         TreeNode treeNode22 = new TreeNode("Woof!", "dog");
         TreeNode treeNode23 = new TreeNode("Meow!", "cat");
@@ -123,19 +123,19 @@ public class coapserver extends ConsoleDemo{
         observedNodes = new HashMap<String, List<String>>();
         try {
         //add listeners
-            coap.addCoapEventListener(new DefaultCoapEventListener() {
+            coap.addCoAPEventListener(new DefaultCoAPEventListener() {
                 @Override
-                public void error(CoapErrorEvent e) {
+                public void error(CoAPErrorEvent e) {
                     System.out.println("OnError: [" + e.errorCode + "] " + e.description);
                 }
 
                 @Override
-                public void log(CoapLogEvent e) {
+                public void log(CoAPLogEvent e) {
                     System.out.println("Log: [" + e.logLevel + "] " + e.message);
                 }
 
                 @Override
-                public void notification(CoapNotificationEvent e) {
+                public void notification(CoAPNotificationEvent e) {
                     if (e.isLatest){
                         System.out.println("OnNotification: Received notification about resource at " + e.URI + ": [" +
                                 coap.getResponseCode() + "] " + new String(coap.getResponseData()));
@@ -146,7 +146,7 @@ public class coapserver extends ConsoleDemo{
                 }
 
                 @Override
-                public void register(CoapRegisterEvent e) {
+                public void register(CoAPRegisterEvent e) {
                     try {
                         System.out.println("OnRegister: Client " + e.remoteHost + ":" + e.remotePort + " attempting to register as an observer for " +
                                 e.URI + "...");
@@ -184,7 +184,7 @@ public class coapserver extends ConsoleDemo{
                 }
 
                 @Override
-                public void request(CoapRequestEvent e) {
+                public void request(CoAPRequestEvent e) {
                     try{
                         String method = RequestMethodToString(e.method);
                         System.out.println("OnRequest: " + method + " request received from " + e.remoteHost + ":" + e.remotePort + " (URIHost=" + e.URIHost +
@@ -271,17 +271,17 @@ public class coapserver extends ConsoleDemo{
                 }
 
                 @Override
-                public void requestComplete(CoapRequestCompleteEvent e) {
+                public void requestComplete(CoAPRequestCompleteEvent e) {
                     // TODO Auto-generated method stub
                 }
 
                 @Override
-                public void responseComplete(CoapResponseCompleteEvent e) {
+                public void responseComplete(CoAPResponseCompleteEvent e) {
                     System.out.println("OnResponseComplete: Response sent for request Id " + e.requestId + ".");
                 }
 
                 @Override
-                public void unregistered(CoapUnregisteredEvent e) {
+                public void unregistered(CoAPUnregisteredEvent e) {
                     System.out.println("OnUnregistered: Client " + e.remoteHost + ":" + e.remotePort + " is no longer observing " + e.URI + ".");
                     String uriPath = e.URI.substring(e.URI.indexOf("://") + 3);
                     uriPath = uriPath.substring(uriPath.indexOf('/') + 1);
@@ -458,15 +458,13 @@ class ConsoleDemo {
     System.out.print(label + punctuation + " ");
     return input();
   }
-
-  static String prompt(String label, String punctuation, String defaultVal)
-  {
-	System.out.print(label + " [" + defaultVal + "] " + punctuation + " ");
-	String response = input();
-	if(response.equals(""))
-		return defaultVal;
-	else
-		return response;
+  static String prompt(String label, String punctuation, String defaultVal) {
+      System.out.print(label + " [" + defaultVal + "] " + punctuation + " ");
+      String response = input();
+      if (response.equals(""))
+        return defaultVal;
+      else
+        return response;
   }
 
   static char ask(String label) {

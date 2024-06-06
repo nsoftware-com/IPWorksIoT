@@ -207,12 +207,12 @@ object FormAMQP: TFormAMQP
       TabOrder = 11
       OnClick = cSSLClick
     end
-    object rFetch: TRadioButton
+    object rRetrieve: TRadioButton
       Left = 104
       Top = 144
       Width = 57
       Height = 25
-      Caption = 'Fetch'
+      Caption = 'Retrieve'
       TabOrder = 5
     end
     object rAutomatic: TRadioButton
@@ -261,15 +261,15 @@ object FormAMQP: TFormAMQP
       TabOrder = 2
       OnClick = bSendClick
     end
-    object bFetch: TButton
+    object bRetrieve: TButton
       Left = 360
       Top = 20
       Width = 83
       Height = 25
-      Caption = '&Fetch Message'
+      Caption = '&Retrieve Message'
       Enabled = False
       TabOrder = 3
-      OnClick = bFetchClick
+      OnClick = bRetrieveClick
     end
     object cSettled: TCheckBox
       Left = 232
