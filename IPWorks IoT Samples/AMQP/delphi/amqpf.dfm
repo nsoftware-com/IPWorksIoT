@@ -187,6 +187,7 @@ object FormAMQP: TFormAMQP
       Top = 96
       Width = 121
       Height = 21
+      PasswordChar = '*'
       TabOrder = 10
     end
     object bConnect: TButton
@@ -300,6 +301,7 @@ object FormAMQP: TFormAMQP
     end
   end
   object iotAMQP1: TiotAMQP
+    SSLAcceptServerCertStore = 'MY'
     SSLCertStore = 'MY'
     Timeout = 5
     OnConnectionStatus = iotAMQP1ConnectionStatus

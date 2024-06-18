@@ -78,12 +78,13 @@ type
       const Description: string);
     procedure iotMQTT1Error(Sender: TObject; ErrorCode: Integer;
       const Description: string);
-    procedure iotMQTT1MessageIn( Sender: TObject; PacketId: Integer;
-  const Topic: String; QOS: Integer; Message: String; MessageB: TArray<System.Byte>;
-  Retained: Boolean; Duplicate: Boolean);
     procedure iotMQTT1SSLServerAuthentication(Sender: TObject;
-      CertEncoded: string; CertEncodedB: TArray<System.Byte>; const CertSubject, CertIssuer, Status: string;
-      var Accept: Boolean);
+      const CertEncoded: string; const CertEncodedB: TBytes; const CertSubject,
+      CertIssuer, Status: string; var Accept: Boolean);
+    procedure iotMQTT1MessageIn(Sender: TObject; PacketId: Integer;
+      const Topic: string; QOS: Integer; const Message: string;
+      const MessageB: TBytes; Retained, Duplicate: Boolean);
+   
   private
     { Private declarations }
   public
@@ -158,20 +159,11 @@ end;
 
 // Fires when a message arrives and logs the message
 procedure TFormMQTT.iotMQTT1MessageIn(Sender: TObject; PacketId: Integer;
-  const Topic: string; QOS: Integer; Message: string; MessageB: TBytes; Retained,
-  Duplicate: Boolean);
+  const Topic: string; QOS: Integer; const Message: string;
+  const MessageB: TBytes; Retained, Duplicate: Boolean);
 begin
-  Log('Message from <' + Topic + '> (QoS ' + inttostr(QOS) + '):');
+Log('Message from <' + Topic + '> (QoS ' + inttostr(QOS) + '):');
   Log('    ' + Message);
-end;
-
-// Fires when authenticating an SSL connection
-procedure TFormMQTT.iotMQTT1SSLServerAuthentication(Sender: TObject;
-  CertEncoded: string; CertEncodedB: TArray<System.Byte>; const CertSubject, CertIssuer, Status: string;
-  var Accept: Boolean);
-begin
-  // Automatically accept certificate for demo purposes
-  Accept := True;
 end;
 
 // Fires when subscribed to a topic
@@ -179,6 +171,15 @@ procedure TFormMQTT.iotMQTT1Subscribed(Sender: TObject; const TopicFilter: strin
   QOS, ResponseCode: Integer);
 begin
   Log('Subscribed to <' + TopicFilter + '> at QoS ' + inttostr(QOS));
+end;
+
+// Fires when authenticating an SSL connection
+procedure TFormMQTT.iotMQTT1SSLServerAuthentication(Sender: TObject;
+  const CertEncoded: string; const CertEncodedB: TBytes; const CertSubject,
+  CertIssuer, Status: string; var Accept: Boolean);
+begin
+// Automatically accept certificate for demo purposes
+  Accept := True;
 end;
 
 // Fires when unsubscribed from a topic
@@ -321,5 +322,6 @@ begin
   tLog.Lines.Add(line);
 end;
 end.
+
 
 

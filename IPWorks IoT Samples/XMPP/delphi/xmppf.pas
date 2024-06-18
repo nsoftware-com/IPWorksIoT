@@ -46,8 +46,10 @@ type
     procedure XMPP1MessageIn(Sender: TObject; const MessageId, From,
       Domain, Resource: String; MessageType: Integer; const Subject,
       MessageThread, MessageText, MessageHTML, Other: String);
-    procedure XMPP1SSLServerAuthentication(Sender: TObject; CertEncoded: string; CertEncodedB: TArray<System.Byte>;
-      const CertSubject, CertIssuer, Status: string; var Accept: Boolean);
+    procedure XMPP1SSLServerAuthentication(Sender: TObject;
+      const CertEncoded: string; const CertEncodedB: TBytes; const CertSubject,
+      CertIssuer, Status: string; var Accept: Boolean);
+   
   private
     { Private declarations }
   public
@@ -122,12 +124,11 @@ begin
 end;
 
 procedure TFormXmpp.XMPP1SSLServerAuthentication(Sender: TObject;
-  CertEncoded: string; CertEncodedB: TArray<System.Byte>; const CertSubject, CertIssuer, Status: string;
-  var Accept: Boolean);
+  const CertEncoded: string; const CertEncodedB: TBytes; const CertSubject,
+  CertIssuer, Status: string; var Accept: Boolean);
 begin
   Accept:=True;
 end;
-
 
 procedure TFormXmpp.XMPP1MessageIn(Sender: TObject; const MessageId, From,
   Domain, Resource: String; MessageType: Integer; const Subject,
@@ -137,4 +138,5 @@ begin
 end;
 
 end.
+
 

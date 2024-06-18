@@ -16,60 +16,107 @@ require_once('../include/ipworksiot_amqp.php');
 require_once('../include/ipworksiot_const.php');
 ?>
 <?php
-	class MyAMQP extends IPWorksIoT_AMQP
-	{
-		function fireSSLServerAuthentication($param) {
-			$param['accept'] = true;
-			return $param;
-		}
-	}
+global $amqp;
+class MyAMQP extends IPWorksIoT_AMQP
+{
+  function fireSSLServerAuthentication($param) {
+    $param['accept'] = true;
+    return $param;
+  }
+  function fireMessageIn($param) {
+    global $amqp;
+    echo "Incoming message from <" . $param['linkname'] . ">: " . $amqp->getReceivedMessageValue() . "\n";
+  }
+}
 
-	$amqp = new MyAMQP();
-?>
+function input($prompt) {
+  echo $prompt;
+  $handle = fopen("php://stdin", "r");
+  $data = trim(fgets($handle));
+  fclose($handle);
+  return $data;
+}
 
-<form method="post">
-	<table>
-	<tr><td>Host</td><td><input type="text" name="host" value="<?php echo isset($_POST["host"])?$_POST["host"]:""; ?>" size=35></td></tr>
-	<tr><td>Port</td><td><input type="text" name="port" value="<?php echo isset($_POST["port"])?$_POST["port"]:"5672"; ?>" size=35></td></tr>
-	<tr><td>User</td><td><input type="text" name="user" value="<?php echo isset($_POST["user"])?$_POST["user"]:""; ?>" size=35></td></tr>
-	<tr><td>Password</td><td><input type="password" name="password" value="<?php echo isset($_POST["password"])?$_POST["password"]:""; ?>" size=35></td></tr>
-	<tr><td>Enable SSL</td><td><input type="checkbox" name="ssl" value="<?php echo isset($_POST["ssl"])?$_POST["ssl"]:"1"; ?>" size=35></td></tr>
-	<tr><td>Message</td><td><input type="text" name="message" value="<?php echo isset($_POST["message"])?$_POST["message"]:"Hello, world!"; ?>" size=35><input type="submit" name="send" value="Send Message"></td></tr>
-	<tr><td><input type="submit" name="retrieve" value="Retrieve Message"></td><td></tr>
-	</table>
-	</form>
+try {
+  $amqp = new MyAMQP();
+  $amqp->setContainerId("ContainerId");
 
-<?php
+  if ($argc < 4) {
+    echo "Usage: php amqp.php [options] server user password -port port -u user -p password -ssl\n\n";
+    echo "    -ssl       whether to use SSL\n";
+    echo "    -port      the port of the AMQP server\n";
+    echo "    server     ...\n";
+    echo "    user       ...\n";
+    echo "    password   ...\n";
+    echo "Example: php amqp.php -port 5671 -ssl 127.0.0.1 username password\n\n";
+    return;
+  } else {
+    $amqp->setRemoteHost($argv[$argc-3]);
+    $amqp->setUser($argv[$argc-2]);
+    $amqp->setPassword($argv[$argc-1]);
+  }
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-	try {
-		//$amqp = new IPWorksIoT_AMQP();
-		$amqp->setUser($_POST["user"]); //set user and password from form
-		$amqp->setPassword($_POST["password"]);
-		$amqp->setContainerId("ContainerId"); //set unique container id
-		$amqp->setSSLEnabled(isset($_POST['ssl']) && $_POST['ssl']); //set ssl enabled or disabled according to check box
-		$amqp->doConnectTo($_POST["host"],$_POST["port"]); //connect with host and port provided in form
-		$amqp->doCreateSession("SessionName"); //create session, senderlink and receiverlink
-		$amqp->doCreateSenderLink("SessionName","SenderLinkName","TargetName");
-		$amqp->setReceiveMode(1); //0 for automatic, 1 for retrieve
-		$amqp->doCreateReceiverLink("SessionName","ReceiverLinkName","TargetName");
-		
-		if(isset($_POST['send'])) {
-			//send message
-			$amqp->doResetMessage();
-			$amqp->setMessageValueType(17); //string type
-			$amqp->setMessageValue($_POST["message"]);
-			$amqp->doSendMessage("SenderLinkName");
-			echo "Message sent.";
-		} else if(isset($_POST['retrieve'])) {
-			//retrieve message
-			$amqp->setRetrieveTimeout(5); //5 second timeout
-			echo "Retrieveing Message... ";
-			$amqp->doRetrieveMessage("ReceiverLinkName");
-			echo "Message received: ",$amqp->getReceivedMessageValue();
-		}
-	} catch (Exception $e) {
-		echo 'Error: ', $e->getMessage(), "\n";
-	}
+  for ($i = 0; $i < $argc; $i++) {
+    if (str_starts_with($argv[$i], "-")) {
+      if ($argv[$i] == "-ssl") { $amqp->setSSLEnabled(true); }
+      if ($argv[$i] == "-port") { $amqp->setRemotePort($argv[$i + 1]);}
+    }
+  }
+  try {
+    $amqp->doConnect();
+  } catch (Exception $ex) {
+    echo "Error connecting: " . $ex->getMessage() . "\n";
+    return;
+  }
+
+  $amqp->doCreateSession("SessionId");
+
+  try {
+    $amqp->doCreateSenderLink("SessionId", "SenderLinkName", "TargetName");
+  } catch (Exception $ex) {
+    echo "Error creating sender link: " . $ex->getMessage() . "\n";
+    return;
+  }
+
+  $amqp->setReceiveMode(1); // Retrieve
+  $amqp->setRetrieveTimeout(5);
+
+  try {
+    $amqp->doCreateReceiverLink("SessionId", "ReceiverLinkName", "TargetName");
+  } catch (Exception $ex) {
+    echo "Error creating receiver link: " . $ex->getMessage() . "\n";
+    return;
+  }
+
+  $command = "";
+  while ($command != "q") {
+    if ($command == "s") {
+      $amqp->doResetMessage();
+      $amqp->setMessageValueType(17); // string
+      $amqp->setMessageValue(input("Enter message to send: "));
+      try {
+        $amqp->doSendMessage("SenderLinkName");
+      } catch (Exception $ex) {
+        "Error sending message: " . $ex->getMessage . "\n";
+        return;
+      }
+      echo "Message sent!\n";
+    } elseif ($command == "f") {
+      echo "Fetching message...\n";
+      try {
+        $amqp->doRetrieveMessage("ReceiverLinkName");
+      } catch (Exception $ex) {
+        if (str_starts_with($ex->getMessage(), "201")) {
+          echo "Timeout - no message received.\n";
+        } else {
+          echo "Error fetching message: " . $ex->getMessage() . "\n";
+          return;
+        }
+      }
+    }
+    $command = input("Choose send message (s), fetch message (f), or quit (q): ");
+  }
+} catch (Exception $ex) {
+  echo "Error: " . $ex->getMessage() . "\n";
 }
 ?>

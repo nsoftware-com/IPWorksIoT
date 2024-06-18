@@ -75,8 +75,9 @@ type
       const MessageId: string; Direction, State: Integer);
     procedure cSSLClick(Sender: TObject);
     procedure iotAMQP1SSLServerAuthentication(Sender: TObject;
-      CertEncoded: string; CertEncodedB: TArray<System.Byte>; const CertSubject, CertIssuer, Status: string;
-      var Accept: Boolean);
+      const CertEncoded: string; const CertEncodedB: TBytes; const CertSubject,
+      CertIssuer, Status: string; var Accept: Boolean);
+    
   private
     { Private declarations }
   public
@@ -250,8 +251,8 @@ begin
 end;
 
 procedure TFormAMQP.iotAMQP1SSLServerAuthentication(Sender: TObject;
-  CertEncoded: string; CertEncodedB: TArray<System.Byte>; const CertSubject, CertIssuer, Status: string;
-  var Accept: Boolean);
+  const CertEncoded: string; const CertEncodedB: TBytes; const CertSubject,
+  CertIssuer, Status: string; var Accept: Boolean);
 begin
   Accept := True;
 end;
@@ -284,5 +285,4 @@ begin
 end;
 
 end.
-
 

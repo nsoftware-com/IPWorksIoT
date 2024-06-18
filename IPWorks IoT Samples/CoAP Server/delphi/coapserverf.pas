@@ -49,27 +49,27 @@ type
       const Description: string);
     procedure iotCoAP1Log(Sender: TObject; LogLevel: Integer;
       const Message: string);
-    procedure iotCoAP1Register(Sender: TObject; const RemoteHost: string;
-      RemotePort: Integer; const URI, URIHost: string; URIPort: Integer;
-      const URIPath, URIQuery: string; Token: string;
-      TokenB: TArray<System.Byte>; var Accept: Boolean);
-    procedure iotCoAP1Request(Sender: TObject; const RemoteHost: string;
-      RemotePort, Method: Integer; const URIHost: string; URIPort: Integer;
-      const URIPath, URIQuery: string; Token: string;
-      TokenB: TArray<System.Byte>; const RequestId: string;
-      var SendResponse: Boolean);
     procedure Button1Click(Sender: TObject);
     procedure DeleteNode(Node: TTreeNode);
     procedure iotCoAP1ResponseComplete(Sender: TObject; const RequestId: string;
       ErrorCode: Integer; const ErrorDescription: string);
-    procedure iotCoAP1Unregistered(Sender: TObject; const RemoteHost: string;
-      RemotePort: Integer; const URI: string);
     procedure NotifyIfNodeObserved(Node: TTreeNode; Deleted: boolean);
     procedure NotifyIfChildrenObserved(Node: TTreeNode);
     procedure SendNotification(uris: tstringlist);
     procedure bAddNodeClick(Sender: TObject);
     procedure bDeleteNodeClick(Sender: TObject);
     procedure bSaveClick(Sender: TObject);
+    procedure iotCoAP1Register(Sender: TObject; const RemoteHost: string;
+      RemotePort: Integer; const URI, URIHost: string; URIPort: Integer;
+      const URIPath, URIQuery, Token: string; const TokenB: TBytes;
+      var Accept: Boolean);
+    procedure iotCoAP1Request(Sender: TObject; const RemoteHost: string;
+      RemotePort, Method: Integer; const URIHost: string; URIPort: Integer;
+      const URIPath, URIQuery, Token: string; const TokenB: TBytes;
+      const RequestId: string; var SendResponse: Boolean);
+    procedure iotCoAP1Unregistered(Sender: TObject; const RemoteHost: string;
+      RemotePort: Integer; const URI, URIHost: string; URIPort: Integer;
+      const URIPath, URIQuery: string);
 
   private
     { Private declarations }
@@ -114,10 +114,11 @@ begin
   Log('OnLog: [' + LogLevel.ToString() + '] ' + Message);
 end;
 
+
 procedure TFormCoapserver.iotCoAP1Register(Sender: TObject;
   const RemoteHost: string; RemotePort: Integer; const URI, URIHost: string;
-  URIPort: Integer; const URIPath, URIQuery: string; Token: string;
-  TokenB: TArray<System.Byte>; var Accept: Boolean);
+  URIPort: Integer; const URIPath, URIQuery, Token: string;
+  const TokenB: TBytes; var Accept: Boolean);
 var
 Node: TTreeNode;
 NodePath: string;
@@ -171,11 +172,11 @@ begin
   end;
 end;
 
+
 procedure TFormCoapserver.iotCoAP1Request(Sender: TObject;
   const RemoteHost: string; RemotePort, Method: Integer; const URIHost: string;
-  URIPort: Integer; const URIPath, URIQuery: string; Token: string;
-  TokenB: TArray<System.Byte>; const RequestId: string;
-  var SendResponse: Boolean);
+  URIPort: Integer; const URIPath, URIQuery, Token: string;
+  const TokenB: TBytes; const RequestId: string; var SendResponse: Boolean);
 var
 MethodStr, NodePath, NewNodeName: string;
 Node, Parent: TTreeNode;
@@ -272,8 +273,10 @@ begin
    Log('OnResponseComplete: Response sent for request Id ' + RequestId + '.');
 end;
 
+
 procedure TFormCoapserver.iotCoAP1Unregistered(Sender: TObject;
-  const RemoteHost: string; RemotePort: Integer; const URI: string);
+  const RemoteHost: string; RemotePort: Integer; const URI, URIHost: string;
+  URIPort: Integer; const URIPath, URIQuery: string);
 var
 Node: TTreeNode;
 NodePath: string;
@@ -293,6 +296,7 @@ begin
   pStr^ := str;
   node.Data := pStr;
 end;
+
 
 procedure TFormCoapserver.bAddNodeClick(Sender: TObject);
 var
@@ -515,4 +519,5 @@ begin
 end;
 
 end.
+
 
