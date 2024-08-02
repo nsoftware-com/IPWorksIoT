@@ -7,7 +7,5 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="mqtt.cs" />
-    <Reference Include="nsoftware.IPWorksIoT">
-      <HintPath>..\..\lib\net6.0\nsoftware.IPWorksIoT.dll</HintPath>
-    </Reference>
+    <PackageReference Include="nsoftware.IPWorksIoT" Version="24.*" />
   </ItemGroup></Project>
