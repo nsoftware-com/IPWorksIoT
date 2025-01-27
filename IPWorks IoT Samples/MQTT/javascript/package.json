@@ -8,7 +8,7 @@
   "main": "mqtt.js",
   "dependencies": {
     "full-icu": "*",
-    "ipworksiot": "^24.0.9067"
+    "ipworksiot": "^24.0.9153"
   },
   "scripts": {
     "mqtt": "node mqtt.js"

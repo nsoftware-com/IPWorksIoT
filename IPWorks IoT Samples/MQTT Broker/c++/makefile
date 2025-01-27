@@ -22,10 +22,10 @@ OS_CFLAGS = -D UNIX -arch arm64
 MACOS = "darwin% Darwin% macos%"
 
 all:
-	g++ $(OS_CFLAGS) -D UNIX -o amqp amqp.cpp  -I../../include/ $(LD_FLAGS) $(FRAMEWORK) $(R_PATH)
+	g++ $(OS_CFLAGS) -D UNIX -o mqttbroker mqttbroker.cpp  -I../../include/ $(LD_FLAGS) $(FRAMEWORK) $(R_PATH)
 
 src: ../../src/ipworksiot.o
-	g++ $(OS_CFLAGS) -o amqp ../../src/ipworksiot.o amqp.cpp  $(LD_FLAGS_SRC) $(FRAMEWORK)
+	g++ $(OS_CFLAGS) -o mqttbroker ../../src/ipworksiot.o mqttbroker.cpp  $(LD_FLAGS_SRC) $(FRAMEWORK)
 
 ../../src/ipworksiot.o:
 	g++ -c -fno-exceptions -fno-rtti -fPIC -arch arm64 -o ../../src/ipworksiot.o ../../src/ipworksiot.cpp
@@ -45,15 +45,15 @@ LD_FLAGS = -lipworksiot  -L../../$(LIB)/
 LD_FLAGS_SRC = -lz 
 
 all:
-	g++ -D UNIX  -o amqp amqp.cpp  -I../../include/ $(LD_FLAGS) $(R_PATH)
+	g++ -D UNIX  -o mqttbroker mqttbroker.cpp  -I../../include/ $(LD_FLAGS) $(R_PATH)
 
 src: ../../src/ipworksiot.o
-	g++ -D UNIX -o amqp ../../src/ipworksiot.o amqp.cpp  -I../../include/ $(LD_FLAGS_SRC)
+	g++ -D UNIX -o mqttbroker ../../src/ipworksiot.o mqttbroker.cpp  -I../../include/ $(LD_FLAGS_SRC)
 
 ../../src/ipworksiot.o:
 	g++ -c -fno-exceptions -fno-rtti -fPIC -o ../../src/ipworksiot.o ../../src/ipworksiot.cpp
 
 clean:
 	rm -f ../../src/*.o
-	rm -f amqp *.o
+	rm -f mqttbroker *.o
 endif

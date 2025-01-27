@@ -19,8 +19,8 @@
     </ProjectConfiguration>    
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>xmpp</ProjectName>
-    <ProjectGuid>{2BB04904-BA27-4AD8-A0BA-084C735AB025}</ProjectGuid>
+    <ProjectName>mqttbroker</ProjectName>
+    <ProjectGuid>{2BB04903-BA27-4AD8-A0BA-084C735AB025}</ProjectGuid>
     <VCTargetsPath Condition="'$(VCTargetsPath14)' != '' and '$(VSVersion)' == '' and $(VisualStudioVersion) == ''">$(VCTargetsPath14)</VCTargetsPath>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -101,7 +101,7 @@
       <Command>copy ..\..\lib\ipworksiot24.dll $(OutDir)</Command>
     </PreBuildEvent>
     <Midl>
-      <TypeLibraryName>.\Debug/xmpp.tlb</TypeLibraryName>
+      <TypeLibraryName>.\Debug/mqttbroker.tlb</TypeLibraryName>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
@@ -110,7 +110,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <PrecompiledHeaderOutputFile>.\Debug/xmpp.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderOutputFile>.\Debug/mqttbroker.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
       <ObjectFileName>.\Debug/</ObjectFileName>
       <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
@@ -124,16 +124,16 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>../../lib/ipworksiot24.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>.\Debug/xmpp.exe</OutputFile>
+      <OutputFile>.\Debug/mqttbroker.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\Debug/xmpp.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\Debug/mqttbroker.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug/xmpp.bsc</OutputFile>
+      <OutputFile>.\Debug/mqttbroker.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -141,7 +141,7 @@
       <Command>copy ..\..\lib64\ipworksiot24.dll $(OutDir)</Command>
     </PreBuildEvent>
     <Midl>
-      <TypeLibraryName>.\Debug/xmpp.tlb</TypeLibraryName>
+      <TypeLibraryName>.\Debug/mqttbroker.tlb</TypeLibraryName>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
@@ -149,7 +149,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <PrecompiledHeaderOutputFile>.\Debug64/xmpp.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderOutputFile>.\Debug64/mqttbroker.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\Debug64/</AssemblerListingLocation>
       <ObjectFileName>.\Debug64/</ObjectFileName>
       <ProgramDataBaseFileName>.\Debug64/</ProgramDataBaseFileName>
@@ -163,15 +163,15 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>../../lib64/ipworksiot24.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>.\Debug64/xmpp.exe</OutputFile>
+      <OutputFile>.\Debug64/mqttbroker.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\Debug64/xmpp.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\Debug64/mqttbroker.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug/xmpp.bsc</OutputFile>
+      <OutputFile>.\Debug/mqttbroker.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>  
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -179,7 +179,7 @@
       <Command>copy ..\..\lib\ipworksiot24.dll $(OutDir)</Command>
     </PreBuildEvent>
     <Midl>
-      <TypeLibraryName>.\Release/xmpp.tlb</TypeLibraryName>
+      <TypeLibraryName>.\Release/mqttbroker.tlb</TypeLibraryName>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
@@ -190,7 +190,7 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeaderOutputFile>.\Release/xmpp.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderOutputFile>.\Release/mqttbroker.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
       <ObjectFileName>.\Release/</ObjectFileName>
       <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
@@ -203,15 +203,15 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>../../lib/ipworksiot24.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>.\Release/xmpp.exe</OutputFile>
+      <OutputFile>.\Release/mqttbroker.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ProgramDatabaseFile>.\Release/xmpp.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\Release/mqttbroker.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release/xmpp.bsc</OutputFile>
+      <OutputFile>.\Release/mqttbroker.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -219,7 +219,7 @@
       <Command>copy ..\..\lib64\ipworksiot24.dll $(OutDir)</Command>
     </PreBuildEvent>
     <Midl>
-      <TypeLibraryName>.\Release/xmpp.tlb</TypeLibraryName>
+      <TypeLibraryName>.\Release/mqttbroker.tlb</TypeLibraryName>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
@@ -230,7 +230,7 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeaderOutputFile>.\Release/xmpp.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderOutputFile>.\Release/mqttbroker.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
       <ObjectFileName>.\Release/</ObjectFileName>
       <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
@@ -243,19 +243,19 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>../../lib64/ipworksiot24.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>.\Release/xmpp.exe</OutputFile>
+      <OutputFile>.\Release/mqttbroker.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ProgramDatabaseFile>.\Release/xmpp.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\Release/mqttbroker.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release/xmpp.bsc</OutputFile>
+      <OutputFile>.\Release/mqttbroker.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>  
   <ItemGroup>
   
-    <ClCompile Include="xmpp.cpp">
+    <ClCompile Include="mqttbroker.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>

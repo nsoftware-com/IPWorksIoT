@@ -23,6 +23,7 @@ IPWorks IoT 2024 libraries for the corresponding edition are required to run the
 | [CoAP Server](./IPWorks%20IoT%20Samples/CoAP%20Server) | Shows how to use the CoAP component in server mode to listen for and handle requests. |
 | [JSON Parser](./IPWorks%20IoT%20Samples/JSON%20Parser) | Uses the JSON object to parse JSON from a URL, file, or string input sources. |
 | [MQTT](./IPWorks%20IoT%20Samples/MQTT) | Uses the MQTT demo to send and receive messages over SSL and plaintext. |
+| [MQTT Broker](./IPWorks%20IoT%20Samples/MQTT%20Broker) | Uses the MQTTBroker demo as a broker to handle publishing or subscribing clients. |
 | [XMPP](./IPWorks%20IoT%20Samples/XMPP) | Uses the XMPP component to implement a simple XMPP instant messaging demo. |
 
 ## Support

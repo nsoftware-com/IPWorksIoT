@@ -8,7 +8,7 @@
   "main": "amqp.js",
   "dependencies": {
     "full-icu": "*",
-    "ipworksiot": "^24.0.9067"
+    "ipworksiot": "^24.0.9153"
   },
   "scripts": {
     "amqp": "node amqp.js"
